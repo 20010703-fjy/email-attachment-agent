@@ -132,45 +132,6 @@ crontab -e
 5. 程序选择 `run.bat`
 6. 起始于填写项目目录路径
 
-## 部署给他人使用
-
-### 方式一：打包分发
-
-1. 将整个项目文件夹打包
-2. 告诉用户：
-   - 复制 `config.example.env` 为 `.env`
-   - 编辑 `.env` 填入自己的邮箱信息
-   - 运行对应系统的启动脚本
-
-### 方式二：Docker部署
-
-创建 `Dockerfile`：
-
-```dockerfile
-FROM python:3.9-slim
-
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD ["python", "main.py"]
-```
-
-构建并运行：
-
-```bash
-docker build -t email-agent .
-docker run --env-file .env email-agent
-```
-
-### 方式三：GitHub仓库
-
-1. 将代码推送到GitHub（注意：不要提交 `.env` 文件）
-2. 用户克隆仓库后按照快速开始步骤操作
-
 ## 注意事项
 
 1. 确保163邮箱已开启IMAP服务
